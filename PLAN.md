@@ -7,10 +7,10 @@
 ## Phase 1 — Project Setup
 
 - [ ] Create `index.html` with base HTML structure, meta tags, and viewport settings
-- [ ] Add an inline `<style>` block with CSS reset and base layout (nav, insights bar, canvas area, card panel)
-- [ ] Add an inline `<script>` block with clearly labeled sections: Config, Sample Data, Parser, Data Model, Graph, Interaction, Filter, Insights, App
-- [ ] Download minified D3.js and paste as an inline `<script>` block before the app script
-- [ ] Download minified PapaParse and paste as an inline `<script>` block before the app script
+- [ ] Create `css/styles.css` with CSS reset and base layout (nav, insights bar, canvas area, card panel); reference it from `index.html` via `<link>`
+- [ ] Create stub JS files for each section (`js/config.js`, `js/sample-data.js`, `js/parser.js`, `js/data-model.js`, `js/graph.js`, `js/interaction.js`, `js/filter.js`, `js/insights.js`, `js/app.js`); reference them from `index.html` in order via `<script src="...">`
+- [ ] Download minified D3.js to `js/vendor/d3.min.js` and reference it from `index.html` before the app scripts
+- [ ] Download minified PapaParse to `js/vendor/papaparse.min.js` and reference it from `index.html` before the app scripts
 - [ ] Verify the file opens correctly in a browser with no network requests after load
 
 ---

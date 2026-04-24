@@ -46,14 +46,14 @@ No data is sent to any server at any point.
 
 | Concern | Tool |
 |---|---|
-| Language | Vanilla JavaScript (inline `<script>`) |
-| Graph rendering | D3.js (inlined) |
-| CSV parsing | PapaParse (inlined) |
-| Styling | Plain CSS (inline `<style>`) |
-| Delivery | Single `index.html` — open directly in browser |
+| Language | Vanilla JavaScript (no framework, no bundler) |
+| Graph rendering | D3.js (local file, no CDN) |
+| CSV parsing | PapaParse (local file, no CDN) |
+| Styling | Plain CSS (external `css/styles.css`) |
+| Delivery | Static files — open `index.html` directly in browser or via local server |
 
-### Inlining Strategy
-D3 and PapaParse are copied into the HTML file as inlined `<script>` blocks so the app works fully **offline** after the file is saved. No CDN calls at runtime.
+### Library Strategy
+D3 and PapaParse are downloaded once and stored in `js/vendor/` so the app works fully **offline**. They are referenced via `<script src="js/vendor/...">` — no CDN calls at runtime.
 
 ---
 
@@ -61,21 +61,22 @@ D3 and PapaParse are copied into the HTML file as inlined `<script>` blocks so t
 
 ```
 /
-└── index.html      # Everything: HTML, CSS, JS, inlined libraries
-```
-
-### Internal JS Organization (within `<script>` tag)
-
-```
-// --- Config ---
-// --- Sample Data ---   Fake dataset for demo graph
-// --- Parser ---        CSV parsing and validation
-// --- Data Model ---    buildGraphData()
-// --- Graph ---         D3 simulation and SVG rendering
-// --- Interaction ---   Click, drag, zoom, highlight, hover
-// --- Filter ---        Company filter logic
-// --- Insights ---      Stats derived from parsed data
-// --- App ---           State management and view transitions
+├── index.html              # HTML shell: structure and script/style references
+├── css/
+│   └── styles.css          # All styles
+└── js/
+    ├── config.js           # Constants: palette, radii, simulation params
+    ├── sample-data.js      # SAMPLE_DATA constant (~40–60 fake connections)
+    ├── parser.js           # CSV parsing, column validation, drag-and-drop
+    ├── data-model.js       # buildGraphData() → { nodes, links }
+    ├── graph.js            # D3 simulation, SVG rendering, zoom/pan
+    ├── interaction.js      # Click, highlight/dim, zoom-to-node, profile card
+    ├── filter.js           # Company filter dropdown logic
+    ├── insights.js         # computeInsights(), stats bar rendering
+    ├── app.js              # State object, DOM refs, view transitions, boot
+    └── vendor/
+        ├── d3.min.js
+        └── papaparse.min.js
 ```
 
 ---
