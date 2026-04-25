@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Linked Dots</title>
+  <title>Linked Dots - LinkedIn Connections Visualizer</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
   <!-- Navigation -->
   <nav id="nav">
-    <span id="nav-title">&#128279; Linked Dots</span>
+    <span id="nav-title">&#128279; Linked Dots - LinkedIn Connections Visualizer</span>
     <select id="company-filter">
       <option value="">Filter by company&hellip;</option>
     </select>
@@ -26,7 +26,7 @@
 
   <!-- Demo banner -->
   <div id="demo-banner" class="hidden">
-    <span>&#9888;&#65039; Sample data &mdash; upload your own LinkedIn CSV to get started</span>
+    <span>&#9888;&#65039; Currently showing sample data &mdash; upload your own LinkedIn CSV to get started</span>
     <button id="demo-upload-btn">Upload CSV</button>
   </div>
 
@@ -66,6 +66,7 @@
       <div id="card-position"></div>
       <div id="card-company"></div>
       <div id="card-connected"></div>
+      <a id="card-url" href="#" target="_blank" rel="noopener noreferrer" class="hidden">View LinkedIn profile &#8599;</a>
     </div>
 
     <!-- SVG injected by D3 -->

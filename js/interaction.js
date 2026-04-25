@@ -65,6 +65,13 @@ function selectNode(nodeId) {
     '<span class="card-dot" style="background:' + node.color + '"></span>' + (node.company || '');
   document.getElementById('card-connected').textContent =
     node.connectedOn ? 'Connected ' + node.connectedOn : '';
+  var cardUrl = document.getElementById('card-url');
+  if (node.url) {
+    cardUrl.href = node.url;
+    cardUrl.classList.remove('hidden');
+  } else {
+    cardUrl.classList.add('hidden');
+  }
   var avatar = document.getElementById('card-avatar');
   avatar.textContent = node.name.charAt(0);
   avatar.style.color = node.color;

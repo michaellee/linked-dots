@@ -44,6 +44,7 @@ function buildGraphData(rows) {
       companyKey: companyKey,
       position: r.position,
       connectedOn: r.connectedOn,
+      url: r.url || '',
       color: companyColors[companyKey],
       radius: CONFIG.nodeRadius,
       type: 'connection',

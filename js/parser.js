@@ -50,6 +50,7 @@ function parseCSV(file, onSuccess, onError) {
           company:     (r['Company']      || '').trim() || 'Other',
           position:    (r['Position']     || '').trim(),
           connectedOn: (r['Connected On'] || '').trim(),
+          url:         (r['URL']          || '').trim(),
         }));
         onSuccess(rows);
       },
