@@ -31,6 +31,8 @@ function populateFilterDropdown(rows) {
  */
 function applyFilter(company) {
   if (!company) { clearFilter(); return; }
+  state.selectedNodeId = null;
+  document.getElementById('profile-card').classList.add('hidden');
   state.activeFilter = company;
   updateDimming();
 
