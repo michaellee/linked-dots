@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linked Dots</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <span id="nav-title">&#128279; Linked Dots</span>
+    <select id="company-filter">
+      <option value="">Filter by company&hellip;</option>
+    </select>
+    <button id="clear-filter-btn">Clear</button>
+    <button id="upload-btn">Upload CSV</button>
+    <input type="file" id="file-input" accept=".csv">
+  </nav>
+
+  <!-- Insights bar -->
+  <div id="insights-bar" class="hidden">
+    <span id="insights-text"></span>
+  </div>
+
+  <!-- Demo banner -->
+  <div id="demo-banner" class="hidden">
+    <span>&#9888;&#65039; Sample data &mdash; upload your own LinkedIn CSV to get started</span>
+    <button id="demo-upload-btn">Upload CSV</button>
+  </div>
+
+  <!-- Graph canvas -->
+  <div id="graph-container">
+    <div id="drop-zone" class="hidden">
+      <span id="drop-zone-label">&#128229; Drop your LinkedIn CSV here</span>
+    </div>
+
+    <div id="loading-overlay" class="hidden">
+      <div class="spinner"></div>
+      <p>Building your graph&hellip;</p>
+    </div>
+
+    <div id="error-overlay" class="hidden">
+      <div id="error-box">
+        <h2>&#10060; Invalid CSV</h2>
+        <p id="error-message"></p>
+        <div class="instructions">
+          <p>How to export from LinkedIn:</p>
+          <ol>
+            <li>Go to LinkedIn &rarr; Settings &amp; Privacy</li>
+            <li>Click &ldquo;Data privacy&rdquo; &rarr; &ldquo;Get a copy of your data&rdquo;</li>
+            <li>Select &ldquo;Connections&rdquo; and request the export</li>
+            <li>Download and upload the <strong>Connections.csv</strong> file</li>
+          </ol>
+        </div>
+        <button id="retry-btn">Try another file</button>
+      </div>
+    </div>
+
+    <!-- Profile card -->
+    <div id="profile-card" class="hidden">
+      <button id="card-close" title="Close">&#10005;</button>
+      <div id="card-avatar"></div>
+      <div id="card-name"></div>
+      <div id="card-position"></div>
+      <div id="card-company"></div>
+      <div id="card-connected"></div>
+    </div>
+
+    <!-- SVG injected by D3 -->
+  </div>
+
+  <!-- Footer -->
+  <footer id="footer">&#128274; All data stays in your browser. Nothing is uploaded or stored.</footer>
+
+  <!-- Vendor libraries -->
+  <script src="js/vendor/d3.min.js"></script>
+  <script src="js/vendor/papaparse.min.js"></script>
+
+  <!-- Application (load order matters) -->
+  <script src="js/config.js"></script>
+  <script src="js/sample-data.js"></script>
+  <script src="js/parser.js"></script>
+  <script src="js/data-model.js"></script>
+  <script src="js/graph.js"></script>
+  <script src="js/interaction.js"></script>
+  <script src="js/filter.js"></script>
+  <script src="js/insights.js"></script>
+  <script src="js/app.js"></script>
+
+</body>
+</html>
