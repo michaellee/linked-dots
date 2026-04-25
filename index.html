@@ -11,6 +11,11 @@
   <!-- Navigation -->
   <nav id="nav">
     <span id="nav-title">&#128279; Linked Dots - LinkedIn Connections Visualizer</span>
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder="Search people or companies&hellip;" autocomplete="off">
+      <button id="search-clear" class="hidden" title="Clear search">&#10005;</button>
+      <ul id="search-results" class="hidden"></ul>
+    </div>
     <select id="company-filter">
       <option value="">Filter by company&hellip;</option>
     </select>
@@ -106,6 +111,7 @@
   <script src="js/interaction.js"></script>
   <script src="js/filter.js"></script>
   <script src="js/insights.js"></script>
+  <script src="js/search.js"></script>
   <script src="js/app.js"></script>
 
 </body>

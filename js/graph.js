@@ -128,9 +128,20 @@ function renderGraph(graphData) {
 
   // ── Force simulation ──────────────────────────────
   var simulation = d3.forceSimulation(graphData.nodes)
-    .force('link', d3.forceLink(graphData.links).id(function (d) { return d.id; }).distance(CONFIG.linkDistance))
+    .force('link', d3.forceLink(graphData.links)
+      .id(function (d) { return d.id; })
+      .distance(function (l) {
+        // Only vary distance on direct you→connection links
+        if (l.type !== 'direct') return 40;
+        var deg = (typeof l.target === 'object' ? l.target.degree : 0) || 0;
+        return deg > CONFIG.highDegreeThreshold ? CONFIG.linkDistanceClose : CONFIG.linkDistanceFar;
+      }))
     .force('charge', d3.forceManyBody().strength(CONFIG.chargeStrength))
     .force('center', d3.forceCenter(width / 2, height / 2))
+    .force('radial', d3.forceRadial(function (d) {
+        if (d.type === 'center') return 0;
+        return d.degree > CONFIG.highDegreeThreshold ? 100 : 260;
+      }, width / 2, height / 2).strength(0.2))
     .force('collision', d3.forceCollide().radius(function (d) { return d.radius + 4; }))
     .on('tick', function () {
       linkSel

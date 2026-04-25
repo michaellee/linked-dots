@@ -6,7 +6,9 @@ const CONFIG = {
   nodeRadius: 8,
   youColor: '#3b82f6',
   otherColor: '#64748b',
-  linkDistance: 80,
+  linkDistanceClose: 80,    // you→connection link distance for high-degree nodes
+  linkDistanceFar: 200,     // you→connection link distance for low-degree nodes
+  highDegreeThreshold: 3,   // connections with more than this many links are "close"
   chargeStrength: -220,
   animDuration: 600,
   zoomDuration: 500,

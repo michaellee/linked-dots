@@ -69,5 +69,13 @@ function buildGraphData(rows) {
     }
   });
 
+  // Compute degree (total link count) for each node
+  var degree = {};
+  links.forEach(function (l) {
+    degree[l.source] = (degree[l.source] || 0) + 1;
+    degree[l.target] = (degree[l.target] || 0) + 1;
+  });
+  nodes.forEach(function (n) { n.degree = degree[n.id] || 0; });
+
   return { nodes: nodes, links: links, companyColors: companyColors };
 }

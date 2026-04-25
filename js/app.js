@@ -52,6 +52,8 @@ function handleFile(file) {
       renderGraph(state.graphData);
       renderInsights(computeInsights(rows));
       populateFilterDropdown(rows);
+      initSearch(rows);
+      clearSearch();
       showState('graph');
     },
     function (errMsg) {
@@ -122,5 +124,7 @@ document.getElementById('howto-upload-btn').addEventListener('click', function (
   renderGraph(state.graphData);
   renderInsights(computeInsights(SAMPLE_DATA));
   populateFilterDropdown(SAMPLE_DATA);
+  initSearchUI();
+  initSearch(SAMPLE_DATA);
   showState('demo');
 })();
