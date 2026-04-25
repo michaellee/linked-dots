@@ -65,6 +65,19 @@ button {
 }
 #upload-btn:hover { background: #1d4ed8; }
 #file-input { display: none; }
+#how-to-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #374151;
+  color: #9ca3af;
+  border: 1px solid #4b5563;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+#how-to-btn:hover { background: #4b5563; color: #f9fafb; }
 
 /* ── Insights bar ────────────────────────────────────── */
 #insights-bar {
@@ -286,6 +299,62 @@ button {
   stroke-opacity: 0.4;
 }
 .dimmed { opacity: 0.08 !important; }
+
+/* ── How-to modal ────────────────────────────────────── */
+#howto-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+#howto-box {
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 14px;
+  padding: 32px 36px;
+  max-width: 480px;
+  width: 90%;
+  position: relative;
+}
+#howto-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  background: none;
+  color: #6b7280;
+  font-size: 16px;
+  padding: 2px 4px;
+}
+#howto-close:hover { color: #f9fafb; }
+#howto-box h2 {
+  font-size: 17px;
+  color: #f9fafb;
+  margin-bottom: 20px;
+  padding-right: 24px;
+}
+#howto-box ol {
+  padding-left: 20px;
+  margin-bottom: 24px;
+}
+#howto-box li {
+  color: #9ca3af;
+  font-size: 13.5px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+#howto-box li strong { color: #d1d5db; }
+#howto-upload-btn {
+  background: #2563eb;
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-weight: 600;
+  width: 100%;
+}
+#howto-upload-btn:hover { background: #1d4ed8; }
 
 /* ── Footer ──────────────────────────────────────────── */
 #footer {

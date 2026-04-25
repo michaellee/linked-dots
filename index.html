@@ -16,6 +16,7 @@
     </select>
     <button id="clear-filter-btn">Clear</button>
     <button id="upload-btn">Upload CSV</button>
+    <button id="how-to-btn" title="How to export from LinkedIn">?</button>
     <input type="file" id="file-input" accept=".csv">
   </nav>
 
@@ -49,8 +50,8 @@
           <p>How to export from LinkedIn:</p>
           <ol>
             <li>Go to LinkedIn &rarr; Settings &amp; Privacy</li>
-            <li>Click &ldquo;Data privacy&rdquo; &rarr; &ldquo;Get a copy of your data&rdquo;</li>
-            <li>Select &ldquo;Connections&rdquo; and request the export</li>
+            <li>Click &ldquo;Data privacy&rdquo; &rarr; &ldquo;Download your data&rdquo;</li>
+            <li>Click <strong>Request archive</strong>.</li>
             <li>Download and upload the <strong>Connections.csv</strong> file</li>
           </ol>
         </div>
@@ -70,6 +71,23 @@
     </div>
 
     <!-- SVG injected by D3 -->
+  </div>
+
+  <!-- How-to modal -->
+  <div id="howto-modal" class="hidden">
+    <div id="howto-box">
+      <button id="howto-close" title="Close">&#10005;</button>
+      <h2>How to export from LinkedIn</h2>
+      <ol>
+        <li>Go to your LinkedIn profile and click <strong>Me</strong> in the top nav.</li>
+        <li>Select <strong>Settings &amp; Privacy</strong>.</li>
+        <li>Go to <strong>Data privacy</strong> &rarr; <strong>Download your data</strong>.</li>
+        <li>Click <strong>Request archive</strong>.</li>
+        <li>LinkedIn will email you a download link (usually within a few minutes).</li>
+        <li>Download the archive, open it, and upload the <strong>Connections.csv</strong> file here.</li>
+      </ol>
+      <button id="howto-upload-btn">Upload CSV</button>
+    </div>
   </div>
 
   <!-- Footer -->

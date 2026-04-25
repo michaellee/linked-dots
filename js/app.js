@@ -100,6 +100,22 @@ document.getElementById('clear-filter-btn').addEventListener('click', function (
 // Profile card close
 document.getElementById('card-close').addEventListener('click', clearSelection);
 
+// How-to modal
+var howtoModal = document.getElementById('howto-modal');
+document.getElementById('how-to-btn').addEventListener('click', function () {
+  howtoModal.classList.remove('hidden');
+});
+document.getElementById('howto-close').addEventListener('click', function () {
+  howtoModal.classList.add('hidden');
+});
+howtoModal.addEventListener('click', function (e) {
+  if (e.target === howtoModal) howtoModal.classList.add('hidden');
+});
+document.getElementById('howto-upload-btn').addEventListener('click', function () {
+  howtoModal.classList.add('hidden');
+  triggerUpload();
+});
+
 // ── Boot ─────────────────────────────────────────────────
 (function boot() {
   state.graphData = buildGraphData(SAMPLE_DATA);
