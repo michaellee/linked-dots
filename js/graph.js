@@ -181,6 +181,41 @@ function autoFit(svg, g, nodes, zoomBehavior, width, height) {
   svg.transition().duration(CONFIG.zoomDuration).call(zoomBehavior.transform, transform);
 }
 
+/**
+ * Animate the viewport to fit a given subset of nodes.
+ * Pass an array of node data objects (must have x, y, radius).
+ */
+function zoomToFitNodes(nodes) {
+  if (!graph.svg || !graph.zoom || !nodes || !nodes.length) return;
+
+  var container = document.getElementById('graph-container');
+  var width = container.clientWidth;
+  var height = container.clientHeight;
+  var pad = 80;
+
+  var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  nodes.forEach(function (n) {
+    var r = n.radius || 8;
+    if (n.x - r < minX) minX = n.x - r;
+    if (n.y - r < minY) minY = n.y - r;
+    if (n.x + r > maxX) maxX = n.x + r;
+    if (n.y + r > maxY) maxY = n.y + r;
+  });
+
+  var gw = maxX - minX;
+  var gh = maxY - minY;
+  var scale = Math.min((width - pad * 2) / gw, (height - pad * 2) / gh, 2.5);
+  var cx = (minX + maxX) / 2;
+  var cy = (minY + maxY) / 2;
+
+  var transform = d3.zoomIdentity
+    .translate(width / 2, height / 2)
+    .scale(scale)
+    .translate(-cx, -cy);
+
+  graph.svg.transition().duration(CONFIG.zoomDuration).call(graph.zoom.transform, transform);
+}
+
 function destroyGraph() {
   if (graph.simulation) { graph.simulation.stop(); graph.simulation = null; }
   if (graph.svg) { graph.svg.remove(); graph.svg = null; }
