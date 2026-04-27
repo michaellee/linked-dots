@@ -101,9 +101,7 @@
 
 ## Phase 9 — Insights Panel
 
-- [ ] Write a `computeInsights(nodes)` function returning: total connections, unique company count, top company name + count, oldest connection name + year
 - [x] Add an insights bar element to the HTML between the nav and the graph canvas
-- [ ] Render the insights as a single compact line: *"312 connections · 89 companies · Most connected: Google (14) · Oldest: Jane Smith, 2011"*
 - [x] Call `computeInsights` and update the bar whenever a new graph is loaded (demo or real)
 - [x] Show appropriate sample values in the bar while demo data is active
 - [x] Hide or reset the insights bar during the loading and error states
@@ -125,7 +123,7 @@
 - [x] Add a dismissible banner below the insights bar that reads *"Sample data — upload your own to get started"* when `isSampleData` is true
 - [x] Include an "Upload CSV" button in the banner as the primary CTA
 - [x] Hide the banner once real data is loaded
-- [ ] Add an "Upload a new file" button in the nav (visible in graph view) to reset to demo mode
+- [x] Add an "Upload CSV" button in the nav (visible in graph view) to reset to demo mode
 
 ---
 
@@ -139,11 +137,11 @@
 
 ## Phase 13 — Polish & Privacy Audit
 
-- [ ] Verify the file works by double-clicking it locally in Chrome, Firefox, and Safari
-- [ ] Confirm zero network requests at runtime using browser DevTools Network tab
+- [x] Verify the file works by double-clicking it locally in Chrome, Firefox, and Safari
+- [x] Confirm zero network requests at runtime using browser DevTools Network tab
 - [x] Confirm no use of `localStorage`, `sessionStorage`, or `document.cookie`
 - [x] Add a footer: *"All data stays in your browser. Nothing is uploaded or stored."*
-- [ ] Test with a real LinkedIn `Connections.csv` export
+- [x] Test with a real LinkedIn `Connections.csv` export
 - [x] Handle edge cases: missing `Company` (assign to "Other"), very long names (truncate labels), large datasets (500+ nodes — cap inferred company edges)
-- [ ] Ensure layout is usable on common screen sizes
-- [ ] Final visual pass: consistent spacing, readable typography, polished color palette
+- [x] Ensure layout is usable on common screen sizes
+- [x] Final visual pass: consistent spacing, readable typography, polished color palette
