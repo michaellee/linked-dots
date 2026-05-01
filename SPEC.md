@@ -17,10 +17,10 @@ No data is sent to any server at any point.
 |---|---|
 | `First Name` | Contact's first name |
 | `Last Name` | Contact's last name |
-| `Email Address` | Contact's email (may be empty) |
-| `Company` | Current company |
+| `Company` | Current company (blank values default to "Other") |
 | `Position` | Current job title |
 | `Connected On` | Date the connection was made |
+| `URL` | LinkedIn profile URL (optional — used for profile card link) |
 
 ---
 
@@ -32,7 +32,7 @@ No data is sent to any server at any point.
 
 ### Edges
 - **User → Connection** — an edge from the center node to every connection (always present)
-- **Connection ↔ Connection** — an inferred edge between two connections who share the same `Company` value (case-insensitive match)
+- **Connection ↔ Connection** — an inferred edge between two connections who share the same `Company` value (case-insensitive match); capped at 20 connections per company to avoid O(n²) edge explosion on large datasets
 
 ### Node Coloring
 - Each unique company is assigned a distinct color
@@ -73,6 +73,7 @@ D3 and PapaParse are downloaded once and stored in `js/vendor/` so the app works
     ├── interaction.js      # Click, highlight/dim, zoom-to-node, profile card
     ├── filter.js           # Company filter dropdown logic
     ├── insights.js         # computeInsights(), stats bar rendering
+    ├── search.js           # People/company search with live dropdown results
     ├── app.js              # State object, DOM refs, view transitions, boot
     └── vendor/
         ├── d3.min.js
@@ -118,48 +119,63 @@ D3 and PapaParse are downloaded once and stored in `js/vendor/` so the app works
   1. **Profile card** — a panel appears showing:
 	 - Full name
 	 - Job title (Position)
-	 - Company
+	 - Company (color-coded dot)
 	 - Connected On date
+	 - LinkedIn profile link (when `URL` column is present in the CSV)
   2. **Highlight mode** — the clicked node and all its direct edges are emphasized; all other nodes and edges are dimmed
 - The canvas **smoothly animates (pan + zoom) to center on the clicked node**
 - Clicking the background resets the highlight, closes the profile card, and restores the previous zoom level
 
 ### 7. Insights Panel
-- After a graph is loaded (demo or real), a compact stats bar is shown above or below the nav:
-  - Total connections and unique companies: *"312 connections across 89 companies"*
-  - Most connected company: *"Most connected: Google (14 people)"*
-  - Oldest connection: *"Oldest connection: Jane Smith, since 2011"*
+- After a graph is loaded (demo or real), a compact stats bar is shown below the nav:
+  - Total connections and unique companies: *"312 connections · 89 companies"*
+  - Most connected company: *"Most connected company: Google (14)"*
+  - Oldest connection: *"Oldest: Jane Smith, 2011"* *(pending)*
 - Stats are derived entirely client-side from the parsed data
 - Shown for demo data with sample values; updates immediately when real data is uploaded
 
 ### 8. Company Filter
-- A searchable dropdown lists all unique companies in the dataset
-- Selecting a company highlights all nodes from that company and dims others
-- A "Clear" button resets the filter
+- A dropdown lists all unique companies in the dataset (sorted alphabetically, with connection counts)
+- Selecting a company highlights all nodes from that company, dims others, and **zooms the viewport to fit the matching nodes**
+- A "Clear" button resets the filter and restores the auto-fit zoom
 - Filter and node-click highlight states can coexist (filter narrows, click highlights within)
+
+### 9. Search
+- A search input in the nav bar searches both people and companies in real time
+- A live dropdown shows up to 8 results, each badged as **Person** or **Company**
+- Selecting a person result zooms to and selects that node (showing the profile card)
+- Selecting a company result applies the company filter
+- A clear button (×) resets the search and removes any search-driven highlighting
+
+### 10. How-to Modal
+- A `?` button in the nav bar opens a modal dialog with step-by-step LinkedIn data export instructions
+- Modal includes an **Import CSV** button as a direct CTA
+- Dismisses via the close button (×) or clicking the backdrop
 
 ---
 
 ## UI Layout
 
 ```
-┌──────────────────────────────────────────────────────┐
-│  🔗 LinkedIn Graph   [Company filter ▼]   [Clear]    │
-├──────────────────────────────────────────────────────┤
-│  312 connections · 89 companies · Most connected:    │
-│  Google (14) · Oldest: Jane Smith, 2011              │
-├──────────────────────────────────────────────────────┤
-│  ⚠️ Sample data — upload your own to get started     │
-├──────────────────────────────────────────────────────┤
-│                                                      │
-│                  D3 Graph Canvas                     │
-│                                         ┌──────────┐ │
-│                                         │ Name     │ │
-│                                         │ Title    │ │
-│                                         │ Company  │ │
-│                                         │ Connected│ │
-│                                         └──────────┘ │
-└──────────────────────────────────────────────────────┘
+┌────────────────────────────────────────────────────────────────┐
+│  🔗 Linked Dots  [Search…  ×]  [Filter ▼]  [Clear]  [Import]  [?] │
+├────────────────────────────────────────────────────────────────┤
+│  312 connections · 89 companies · Most connected company: Google (14) │
+├────────────────────────────────────────────────────────────────┤
+│  ⚠️ Sample data — import your own LinkedIn CSV to get started  │
+├────────────────────────────────────────────────────────────────┤
+│                                                                │
+│                      D3 Graph Canvas                          │
+│                                             ┌──────────────┐  │
+│                                             │ Name         │  │
+│                                             │ Title        │  │
+│                                             │ ● Company    │  │
+│                                             │ Connected    │  │
+│                                             │ View profile │  │
+│                                             └──────────────┘  │
+├────────────────────────────────────────────────────────────────┤
+│  🔒 All data stays in your browser. Nothing is uploaded.       │
+└────────────────────────────────────────────────────────────────┘
 ```
 
 ---
